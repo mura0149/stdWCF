@@ -12,22 +12,18 @@ namespace stdWCF
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public string GetData(int value)
+        static List<Student> students = new List<Student>();
+
+        public void AddStudents(string Name, string Klasse, string Rum)
         {
-            return string.Format("You entered: {0}", value);
+            Student std = new Student(Name, Klasse, Rum);
+            students.Add(std);
+            
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public List<Student> GetAllStudents()
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return students;
         }
     }
 }
